@@ -1,0 +1,235 @@
+{% load static %}
+<!--
+author: W3layouts
+author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Bank Card Banking Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Bank Card Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+
+	<script>
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+
+	<!-- css files -->
+	<link href="{% static 'css/css_slider.css' %}" rel="stylesheet"><!-- Slider css -->
+	<link href="{% static 'css/bootstrap.css' %}" rel='stylesheet' type='text/css' /><!-- bootstrap css -->
+	<link href="{% static 'css/style.css' %}" rel='stylesheet' type='text/css' /><!-- custom css -->
+	<link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet"><!-- fontawesome css -->
+	<!-- //css files -->
+
+	<!-- google fonts -->
+	<link
+		href="//fonts.googleapis.com/css?family=Niramit:200,200i,300,300i,400,400i,500,500i,600,600i,700,700i&amp;subset=latin-ext,thai,vietnamese"
+		rel="stylesheet">
+	<!-- //google fonts -->
+
+</head>
+
+<body>
+
+
+	<!-- header -->
+	<header>
+		<div class="container">
+			<!-- nav -->
+			<nav class="py-3 d-lg-flex">
+				<div id="logo">
+					<h1> <a href="index.html"><span class="fa fa-university"></span> Bank Card </a></h1>
+				</div>
+				<label for="drop" class="toggle"><span class="fa fa-bars"></span></label>
+				<input type="checkbox" id="drop" />
+				<ul class="menu ml-auto mt-1">
+					{% url 'homepage' as homepage %}
+					{% url 'contact' as contact %}
+					<li class="{% if request.path == homepage %}active{% endif %}"><a href="{{ homepage }}">Home</a>
+					</li>
+					<li class="{% if request.path == contact %}active{% endif %}"><a
+							href="{% url 'contact' %}">Contact</a></li>
+					<li class=""><a href="{% url 'account-login' %}">Portal</a></li>
+					<li class="last-grid"><a href="tel:+2348100134741">Call Now</a></li>
+				</ul>
+			</nav>
+			<!-- //nav -->
+		</div>
+	</header>
+	<!-- //header -->
+
+
+	<!-- banner -->
+	<div class="banner" id="home">
+		<div class="layer">
+			<div class="container">
+				<div class="banner-text-w3pvt">
+					<!-- banner slider-->
+					<div class="csslider infinity" id="slider1">
+						<input type="radio" name="slides" checked="checked" id="slides_1" />
+						<input type="radio" name="slides" id="slides_2" />
+						<input type="radio" name="slides" id="slides_3" />
+						<ul class="banner_slide_bg">
+							<li>
+								<div class="w3ls_banner_txt">
+									<h2 class="b-w3ltxt text-capitalize mt-md-4">Business <span>Loans.</span> </h2>
+									<h4 class="b-w3ltxt text-capitalize">Cash Management</h4>
+									<p class="w3ls_pvt-title my-3">onec consequat sapien ut leo cursus rhoncus. Nullam
+										dui mi, vulputate ac metus semper Nullam dui mi.
+										Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+										cubiliacurae, Curabitur quis luctus lectus.
+										Morbi at dui nisl.</p>
+									<a href="services.html" class="btn btn-banner my-3 mr-2">Read More</a>
+									<a href="contact.html" class="btn btn-banner1 my-3">Get Started</a>
+								</div>
+							</li>
+							<li>
+								<div class="w3ls_banner_txt">
+									<h3 class="b-w3ltxt text-capitalize mt-md-4">Savings <span>Accounts.</span> </h3>
+									<h4 class="b-w3ltxt text-capitalize">Cash Management</h4>
+									<p class="w3ls_pvt-title my-3">onec consequat sapien ut leo cursus rhoncus. Nullam
+										dui mi, vulputate ac metus semper Nullam dui mi.
+										Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+										cubiliacurae, Curabitur quis luctus lectus.
+										Morbi at dui nisl.</p>
+									<a href="services.html" class="btn btn-banner my-3 mr-2">Read More</a>
+									<a href="contact.html" class="btn btn-banner1 my-3">Get Started</a>
+								</div>
+							</li>
+							<li>
+								<div class="w3ls_banner_txt">
+									<h3 class="b-w3ltxt text-capitalize mt-md-4">Debit and <span>Credit Cards.</span>
+									</h3>
+									<h4 class="b-w3ltxt text-capitalize">Cash Management</h4>
+									<p class="w3ls_pvt-title my-3">onec consequat sapien ut leo cursus rhoncus. Nullam
+										dui mi, vulputate ac metus semper Nullam dui mi.
+										Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+										cubiliacurae, Curabitur quis luctus lectus.
+										Morbi at dui nisl.</p>
+									<a href="services.html" class="btn btn-banner my-3 mr-2">Read More</a>
+									<a href="contact.html" class="btn btn-banner1 my-3">Get Started</a>
+								</div>
+							</li>
+						</ul>
+						<div class="navigation">
+							<div>
+								<label for="slides_1"></label>
+								<label for="slides_2"></label>
+								<label for="slides_3"></label>
+							</div>
+						</div>
+					</div>
+					<!-- //banner slider-->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //banner -->
+	<div class="container">
+
+		{% if messages %}
+		{% for message in messages  %}
+
+		{% if message.tags == 'success' %}
+		<h3 class='alert alert-success'>{{ message }}</h3>
+		{% else %}
+		<h3 class='alert alert-danger'>{{ message }}</h3>
+
+		{% endif %}
+
+		{% endfor %}
+		{% endif %}
+
+	</div>
+	{% block content %}
+
+	{% endblock content %}
+	<!-- about -	<!-- footer-top -->
+	<section class="footer-top pt-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 col-sm-6 mb-4">
+					<h3 class="my-sm-3 mb-2"><span class="fa mr-2 fa-mobile"></span> Mobile Apps</h3>
+					<p class="mb-sm-4"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p>
+				</div>
+				<div class="col-lg-3 col-sm-6 mb-4">
+					<h3 class="my-sm-3 mb-2"><span class="fa mr-2 fa-shield"></span> Security Tips</h3>
+					<p class="mb-sm-4"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p>
+				</div>
+				<div class="col-lg-3 col-sm-6 mb-4">
+					<h3 class="my-sm-3 mb-2"><span class="fa mr-2 fa-globe"></span> Various Branches</h3>
+					<p class="mb-sm-4"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p>
+				</div>
+				<div class="col-lg-3 col-sm-6 mb-4">
+					<h3 class="my-sm-3 mb-2"><span class="fa mr-2 fa-phone"></span> 24/7 Support</h3>
+					<p class="mb-4"> Vestibulum ante ipsum primis in faucibus orci luctus et ultrices.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- //footer-top -->
+
+	<!-- footer -->
+	<footer class="footer py-5">
+
+
+		<!-- copyright -->
+		<section class="copy-right py-4">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-7">
+						<p class="">© 2019 Bank Card. All rights reserved | Design by
+							<a href="http://w3layouts.com"> W3layouts.</a>
+						</p>
+					</div>
+					<div class="col-lg-5 mt-lg-0 mt-3">
+						<ul class="list-w3 d-sm-flex">
+							<li>
+								<a href="#">
+									Privicy Policy
+								</a>
+							</li>
+							<li class="mx-sm-4 mx-3">
+								<a href="#">
+									Terms & Conditions
+								</a>
+							</li>
+							<li>
+								<a href="#">
+									Disclaimer.
+								</a>
+							</li>
+							<li>
+								<a href="#">
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- //copyright -->
+
+		<!-- move top -->
+		<div class="move-top text-right">
+			<a href="#home" class="move-top">
+				<span class="fa fa-angle-up  mb-3" aria-hidden="true"></span>
+			</a>
+		</div>
+		<!-- move top -->
+
+</body>
+
+</html>

@@ -1,0 +1,53 @@
+{% extends 'home/main.html' %}
+{% load static %}
+{% block content %}
+
+<section class="contact py-5" id='contact'>
+	<div class="container py-lg-5">
+		<h2 class="heading mb-sm-5 mb-4">Get in <strong> touch with us </strong></h2>
+		<div class="row">
+			<div class="col-lg-4 col-md-6 contact-address">
+				<h4 class="mb-4 w3f_title">Contact Address</h4>
+				<ul class="list-w3">
+					<li class="d-flex"><span class="fa mt-1 mr-1 fa-map-marker"></span>2130 Fulton Street, San Diego,
+						<br>CA 94117-1080 USA</li>
+					<li class="my-3"><span class="fa mr-1 fa-phone"></span>1-600-1234-567</li>
+					<li class="my-3"><span class="fa mr-1 fa-phone"></span>1-600-1234-567</li>
+					<li class=""><span class="fa mr-1 fa-envelope"></span><a
+							href="mailto:info@example.com">info@example.com</a></li>
+				</ul>
+				<h4 class="mt-sm-5 mt-4 mb-3 w3f_title">Follow Us</h4>
+				<p>Sed mattis hendrerit dolor sed rhoncus. Praesent arcu quam, sodales ac varius.</p>
+				<ul class="list-social">
+					<li><a href="#" class="facebook"><span class="fa mr-1 fa-facebook"></span></a></li>
+					<li class="my-3"><a href="#" class="twitter"><span class="fa mr-1 fa-twitter"></span></a></li>
+					<li class="my-3"><a href="#" class="google"><span class="fa mr-1 fa-google-plus"></span></a></li>
+					<li class=""><a href="#" class="linkedin"><span class="fa mr-1 fa-linkedin"></span></a></li>
+				</ul>
+			</div>
+			<div class="col-lg-4 col-md-6 contact-form mt-md-0 mt-sm-5 mt-4">
+				<h4 class="mb-4 w3f_title">Contact Form</h4>
+				<form name="contactform" id="contactform" method="post">
+					{% csrf_token %}
+					{% for field in form  %}
+					<div class="form-group">
+						{{ field.label_tag }}
+						{{ field }}
+						<span class="text-danger">{{ field.errors }}</span>
+					</div>
+					{% endfor %}
+
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+			</div>
+			<div class="col-lg-4 contact-map mt-lg-0 mt-sm-5 mt-4">
+				<h4 class="mb-4 w3f_title">Contact Map</h4>
+				<iframe
+					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3023.9503398796587!2d-73.9940307!3d40.719109700000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a27e2f24131%3A0x64ffc98d24069f02!2sCANADA!5e0!3m2!1sen!2sin!4v1441710758555"
+					allowfullscreen=""></iframe>
+			</div>
+		</div>
+	</div>
+</section>
+
+{% endblock content %}

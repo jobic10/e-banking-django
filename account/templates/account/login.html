@@ -1,0 +1,59 @@
+{% extends 'account/main.html' %}
+{% block content %}
+<div class="container-fluid page-body-wrapper full-page-wrapper">
+  <div class="row w-100 m-0">
+    <div class="content-wrapper full-page-wrapper d-flex align-items-center auth login-bg">
+      <div class="card col-lg-4 mx-auto">
+        <div class="card-body px-5 py-5">
+          <h3 class="card-title text-left mb-3">User Login</h3>
+          <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>Email *</label>
+              <input type="email" required name='email' class="form-control p_input">
+            </div>
+            <div class="form-group">
+              <label>Password *</label>
+              <input type="password" required name='password' class="form-control p_input">
+            </div>
+            <div class="form-group d-flex align-items-center justify-content-between">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input type="checkbox" class="form-check-input"> Remember me </label>
+              </div>
+              <a href="#" class="forgot-pass">Forgot password</a>
+            </div>
+            <div class="text-center">
+              <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
+
+              {% if messages %}
+              {% for message in messages  %}
+
+              {% if message.tags == 'success' %}
+              <p class='alert alert-success'>{{ message }}</p>
+              {% else %}
+              <p class='alert alert-danger'>{{ message }}</p>
+
+              {% endif %}
+
+              {% endfor %}
+              {% endif %}
+
+
+            </div>
+            <div class="d-flex">
+              <a href="{% url 'homepage' %}" class="btn btn-secondary ">
+                <i class="mdi mdi-home"></i> Homepage </a>
+
+            </div>
+            <p class="sign-up">Don't have an Account? Visit Nearest Bank Branch</p>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- content-wrapper ends -->
+  </div>
+  <!-- row ends -->
+  <!-- page-body-wrapper ends -->
+</div>
+{% endblock content %}
