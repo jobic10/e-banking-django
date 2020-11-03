@@ -78,6 +78,15 @@
   <!-- Custom js for this page -->
   <script src="{% static 'assets/js/dashboard.js' %} "></script>
   <!-- End custom js for this page -->
+
+  {% if messages %}
+  <script type="text/javascript">
+    $(window).on('load', function () {
+      $('#messageModal').modal('show');
+    });
+  </script>
+  {% endif %}
+
 </body>
 
 </html>

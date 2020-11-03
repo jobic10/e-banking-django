@@ -26,19 +26,6 @@
             <div class="text-center">
               <button type="submit" class="btn btn-primary btn-block enter-btn">Login</button>
 
-              {% if messages %}
-              {% for message in messages  %}
-
-              {% if message.tags == 'success' %}
-              <p class='alert alert-success'>{{ message }}</p>
-              {% else %}
-              <p class='alert alert-danger'>{{ message }}</p>
-
-              {% endif %}
-
-              {% endfor %}
-              {% endif %}
-
 
             </div>
             <div class="d-flex">
