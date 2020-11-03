@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account.apps.AccountConfig',
     'home.apps.HomeConfig',
+    'advert.apps.AdvertConfig',
 
 ]
 
@@ -129,3 +130,6 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
 AUTH_USER_MODEL = 'account.User'
+
+MEDIA_URL = '/media/images/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/uploads/')

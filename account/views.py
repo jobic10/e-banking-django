@@ -7,6 +7,8 @@ from django.contrib import messages
 
 
 def account_login(request):
+    if request.user.is_authenticated:
+        return redirect(reverse('dashboard'))
     if request.method == 'POST':
         username = request.POST.get('email')
         password = request.POST.get('password')
@@ -20,6 +22,12 @@ def account_login(request):
     return render(request, "account/login.html")
 
 
-def dashboard(request):
+def account_dashboard(request):
     context = {}
     return render(request, "account/dashboard.html", context)
+
+
+def account_logout(request):
+    logout(request)
+    messages.success(request, 'Thanks for the time!')
+    return redirect(reverse('account-login'))
