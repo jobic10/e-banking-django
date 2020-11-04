@@ -19,9 +19,10 @@
       <div class="col-6 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">{{ customer }}'s Personal Detail</h4>
-
-            <img class='img-fluid img-lg' src="{{ customer.user.profile_pic.url }}" alt="">
+            <h4 class="card-title text-center">{{ customer }}'s Personal Detail</h4>
+            <div class='text-center m-3'>
+              <img class='img-fluid img-lg rounded-circle' src="{{ customer.user.profile_pic.url }}" alt="">
+            </div>
             <div class="table-responsive">
               <table class="table table-striped table-bordered">
 
@@ -49,6 +50,14 @@
                   <th>Address </th>
                   <td>{{ customer.user.address }}</td>
                 </tr>
+                <tr>
+                  <th>Member Since </th>
+                  <td>{{ customer.user.date_joined|timesince }} ago</td>
+                </tr>
+                <tr>
+                  <th>Last Profile Updated </th>
+                  <td>{{ customer.user.updated_at|timesince }} ago</td>
+                </tr>
 
 
               </table>
@@ -61,8 +70,6 @@
         <div class="card">
           <div class="card-body">
             <h4 class="card-title">{{ customer }}'s Account Details</h4>
-
-            <img class='img-fluid img-lg' src="{{ customer.user.profile_pic.url }}" alt="">
             <div class="table-responsive">
               <table class="table table-striped table-bordered">
 
@@ -78,6 +85,10 @@
                 <tr>
                   <th>Balance </th>
                   <td>&#8358; {{ customer.balance }}</td>
+                </tr>
+                <tr>
+                  <th>Pin </th>
+                  <td>{{ customer.pin }}</td>
                 </tr>
 
               </table>

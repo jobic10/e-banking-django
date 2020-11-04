@@ -37,7 +37,6 @@ class User(AbstractUser):
     gender = models.CharField(max_length=1, choices=GENDER)
     profile_pic = models.ImageField(null=False)
     address = models.TextField()
-    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
