@@ -13,9 +13,9 @@ from .models import *
 # Create your views here.
 
 
-def generate_account_number():
+def generate_account_number(account_type):
     number = ''.join(random.choices(string.digits, k=10))
-    if Customer.objects.filter(account_number=number).exists():
+    if Customer.objects.filter(account_number=number, account_type=account_type).exists():
         return generate_account_number()
     return number
 
@@ -35,7 +35,7 @@ def create_customer_account(request):
             user.save()
             customer = customerForm.save(commit=False)
             customer.user = user
-            account_number = generate_account_number()
+            account_number = generate_account_number(customer.account_type)
             pin = generate_pin_number()
             customer.account_number = account_number
             customer.pin = pin
