@@ -7,11 +7,11 @@ class UserAdmin(UA):
     ordering = ('email',)
     add_fieldsets = (
         (None, {'fields': ('first_name', 'last_name', 'email',
-                           'password1', 'password2', 'is_superuser', 'is_staff', 'is_active', 'gender', 'user_type')}),
+                           'password1', 'password2', 'profile_pic', 'is_superuser', 'is_staff', 'is_active', 'gender', 'user_type')}),
     )
     fieldsets = (
         (None, {'fields': ('first_name', 'last_name', 'email',
-                           'password', 'is_superuser', 'is_staff', 'is_active', 'gender', 'user_type')}),
+                           'password', 'profile_pic', 'is_superuser', 'is_staff', 'is_active', 'gender', 'user_type')}),
     )
 
 
