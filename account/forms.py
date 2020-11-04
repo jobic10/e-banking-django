@@ -1,5 +1,7 @@
 from django import forms
+from django.forms.widgets import DateInput
 from .models import *
+from django.contrib.auth.forms import UserCreationForm
 
 
 class FormSettings(forms.ModelForm):
@@ -13,12 +15,20 @@ class FormSettings(forms.ModelForm):
 class CustomerForm(FormSettings):
     class Meta:
         model = Customer
-        fields = ('account_type', 'account_number', 'pin',
-                  'date_of_birth', 'balance', 'phone', )
+        fields = ('phone', 'date_of_birth', 'account_type',
+                  'balance', )
+        widgets = {
+            'date_of_birth': DateInput(attrs={'type': 'date'})
+        }
 
 
-class UserForm(FormSettings):
+class UserForm(UserCreationForm, FormSettings):
+    def __init__(self, *args, **kwargs):
+        super(UserForm, self).__init__(*args, **kwargs)
+        for fieldname in ['password1', 'password2']:
+            self.fields[fieldname].help_text = None
+
     class Meta:
         model = User
         fields = ('last_name', 'first_name', 'email',
-                  'user_type', 'gender', 'profile_pic', 'address', )
+                  'gender', 'profile_pic', 'address')

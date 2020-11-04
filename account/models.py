@@ -35,7 +35,7 @@ class User(AbstractUser):
     email = models.EmailField(unique=True)
     user_type = models.IntegerField(choices=USER_TYPE)
     gender = models.CharField(max_length=1, choices=GENDER)
-    profile_pic = models.ImageField(null=False, default='profile.jpg')
+    profile_pic = models.ImageField(null=False)
     address = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -52,13 +52,12 @@ class Customer(models.Model):
     ACCOUNT_TYPE = [
         ('Savings', 'Savings'),
         ('Current', 'Current'),
-        ('Fixed', 'Fixed')
     ]
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, limit_choices_to={'user_type': 3})
     account_type = models.CharField(max_length=8, choices=ACCOUNT_TYPE)
     account_number = models.CharField(max_length=15)
-    pin = models.CharField(max_length=4, default='0000')
+    pin = models.CharField(max_length=4)
     date_of_birth = models.DateField()
     balance = models.FloatField()
     phone = models.CharField(max_length=11)

@@ -7,11 +7,11 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title"> Form elements </h3>
+      <h3 class="page-title"> View Customer </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="#">Forms</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Form elements</li>
+          <li class="breadcrumb-item"><a href="#">Customer</a></li>
+          <li class="breadcrumb-item active" aria-current="page">View</li>
         </ol>
       </nav>
     </div>
@@ -19,8 +19,11 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Basic form elements</h4>
-            <p class="card-description"> Basic form elements </p>
+            <h4 class="card-title">Viewing {{ customer }}'s Profile</h4>
+            <p class="card-description">
+              <marquee behavior="alternate" direction="right" scrollamount='1'>Be sure to have photocopies of their
+                credentials</marquee>
+            </p>
             {% comment %}
 
 
@@ -66,10 +69,13 @@
               <button class="btn btn-dark">Cancel</button>
             </form>
             {% endcomment %}
-            <form action="" class="forms-sample" method="post">
-              {{ user_form }}
-              {{ customer_form }}
-
+            <form action="" class="forms-sample" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ user_form.as_p }}
+              <hr>
+              {{ customer_form.as_p }}
+              <hr>
+              <input type="submit" class="btn btn-info" value="Create New Customer">
             </form>
           </div>
         </div>
