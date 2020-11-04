@@ -77,7 +77,8 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
-    <li class="nav-item menu-items">
+    {% url 'create_customer_account' as create_customer_account %}
+    <li class="nav-item  {% if request.path == create_customer_account %}active {% endif %}  menu-items">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="menu-icon">
           <i class="mdi mdi-laptop"></i>
@@ -87,7 +88,7 @@
       </a>
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Create New</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ create_customer_account }}">Create New</a></li>
           <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Manage</a></li>
         </ul>
       </div>

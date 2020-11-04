@@ -61,3 +61,6 @@ class Customer(models.Model):
     date_of_birth = models.DateField()
     balance = models.FloatField()
     phone = models.CharField(max_length=11)
+
+    def __str__(self):
+        return str(self.user)
