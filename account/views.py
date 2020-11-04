@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
@@ -22,6 +22,7 @@ def account_login(request):
     return render(request, "account/login.html")
 
 
+@login_required
 def account_dashboard(request):
     context = {}
     return render(request, "account/dashboard.html", context)
@@ -30,4 +31,4 @@ def account_dashboard(request):
 def account_logout(request):
     logout(request)
     messages.success(request, 'Thanks for the time!')
-    return redirect(reverse('account-login'))
+    return redirect(reverse('account_login'))

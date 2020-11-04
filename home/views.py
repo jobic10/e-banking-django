@@ -22,3 +22,7 @@ def contact(request):
         else:
             messages.error(request, "Form errors")
     return render(request, 'home/contact.html', context)
+
+
+def error_404(request, exception):
+    return render(request, 'home/404.html')

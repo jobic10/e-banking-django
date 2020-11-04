@@ -133,3 +133,6 @@ AUTH_USER_MODEL = 'account.User'
 
 MEDIA_URL = '/media/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images/uploads/')
+
+
+LOGIN_URL = 'account_login'
