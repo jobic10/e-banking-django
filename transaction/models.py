@@ -13,7 +13,8 @@ class Debit(models.Model):
 
 class Transaction(models.Model):
     TYPE = [('Debit', 'Debit'), ('Credit', 'Credit')]
-    customer = models.ForeignKey(Customer, on_delete=models.SET_NULL)
+    receiver = models.ForeignKey(Customer, on_delete=models.SET_NULL)
+    sender = models.ForeignKey(Customer, on_delete=models.SET_NULL)
     description = models.CharField(max_length=100)
     balance_before = models.FloatField()
     amount = models.FloatField()
