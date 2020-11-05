@@ -3,9 +3,8 @@ import string
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-from rest_framework.generics import get_object_or_404
 
 from .forms import *
 from .models import *
