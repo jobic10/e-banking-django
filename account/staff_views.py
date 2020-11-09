@@ -57,7 +57,7 @@ def view_customer(request, customer_id):
 
 def manage_customer(request):
     allCustomers = Customer.objects.all()
-    paginator = Paginator(allCustomers, 1)
+    paginator = Paginator(allCustomers, 25)
     page_number = request.GET.get('page')
     customers = paginator.get_page(page_number)
     context = {
