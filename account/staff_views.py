@@ -53,3 +53,8 @@ def view_customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     context = {'customer': customer}
     return render(request, "account/view_customer.html", context)
+
+
+def search_customer(request):
+    context = {}
+    return render(request, "account/search_customer.html", context)

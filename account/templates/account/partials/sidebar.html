@@ -78,10 +78,11 @@
       </a>
     </li>
     {% url 'create_customer_account' as create_customer_account %}
+    {% url 'search_customer' as search_customer %}
     <li class="nav-item  {% if request.path == create_customer_account %}active {% endif %}  menu-items">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="menu-icon">
-          <i class="mdi mdi-laptop"></i>
+          <i class="mdi mdi-account-group"></i>
         </span>
         <span class="menu-title">Customers</span>
         <i class="menu-arrow"></i>
@@ -89,7 +90,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{{ create_customer_account }}">Create New</a></li>
-          <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Manage</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ search_customer }}">Search</a></li>
         </ul>
       </div>
     </li>
@@ -98,7 +99,7 @@
     <li class="nav-item menu-items">
       <a class="nav-link" href="pages/forms/basic_elements.html">
         <span class="menu-icon">
-          <i class="mdi mdi-playlist-play"></i>
+          <i class="mdi mdi-bank-transfer"></i>
         </span>
         <span class="menu-title">Form Elements</span>
       </a>
