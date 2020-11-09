@@ -9,5 +9,5 @@ urlpatterns = [
          name='create_customer_account'),
     path('view_customer/<int:customer_id>/',
          staff_views.view_customer, name='view_customer'),
-    path("search_customer/", staff_views.search_customer, name='search_customer'),
+    path("manage_customer/", staff_views.manage_customer, name='manage_customer'),
 ]

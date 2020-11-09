@@ -1,6 +1,6 @@
 import random
 import string
-
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
@@ -55,6 +55,12 @@ def view_customer(request, customer_id):
     return render(request, "account/view_customer.html", context)
 
 
-def search_customer(request):
-    context = {}
-    return render(request, "account/search_customer.html", context)
+def manage_customer(request):
+    allCustomers = Customer.objects.all()
+    paginator = Paginator(allCustomers, 1)
+    page_number = request.GET.get('page')
+    customers = paginator.get_page(page_number)
+    context = {
+        'customers': customers
+    }
+    return render(request, "account/manage_customer.html", context)

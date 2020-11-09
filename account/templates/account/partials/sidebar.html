@@ -78,7 +78,7 @@
       </a>
     </li>
     {% url 'create_customer_account' as create_customer_account %}
-    {% url 'search_customer' as search_customer %}
+    {% url 'manage_customer' as manage_customer %}
     <li class="nav-item  {% if request.path == create_customer_account %}active {% endif %}  menu-items">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <span class="menu-icon">
@@ -90,7 +90,7 @@
       <div class="collapse" id="ui-basic">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{{ create_customer_account }}">Create New</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{ search_customer }}">Search</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ manage_customer }}">Manage</a></li>
         </ul>
       </div>
     </li>
