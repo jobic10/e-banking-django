@@ -10,4 +10,6 @@ urlpatterns = [
     path('view_customer/<int:customer_id>/',
          staff_views.view_customer, name='view_customer'),
     path("manage_customer/", staff_views.manage_customer, name='manage_customer'),
+    path("edit_customer/<int:customer_id>/",
+         staff_views.edit_customer, name='edit_customer'),
 ]

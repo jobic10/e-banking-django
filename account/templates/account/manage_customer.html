@@ -35,7 +35,12 @@
                   <td>{{ customer.user }}</td>
                   <td>{{ customer.account_number }}</td>
                   <td>{{ customer.account_type }}</td>
-                  <td>{{ customer.id }}</td>
+                  <td><a href="{% url 'edit_customer' customer.id  %}" class="btn btn-info"
+                      onclick="return confirm('Edit {{ customer.user }}\'s Profile ?')">Edit
+                      Customer</a> - <button data-toggle="modal" data-target="#viewTransaction" class="btn btn-primary"
+                      value="{{customer.id}}">View
+                      Transactions</button> -
+                    <a href="" class="btn btn-danger">Close Account</a></td>
                 </tr>
                 {% endfor %}
               </table>

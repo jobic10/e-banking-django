@@ -64,3 +64,23 @@ def manage_customer(request):
         'customers': customers
     }
     return render(request, "account/manage_customer.html", context)
+
+
+def edit_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    user = customer.user
+    userForm = UserForm(request.POST or None,
+                        request.FILES or None, instance=customer.user)
+    customerForm = CustomerForm(request.POST or None, instance=customer)
+    if request.method == 'POST':
+        if all([userForm.is_valid(), customerForm.is_valid()]):
+            userForm.save()
+            customerForm.save()
+            messages.success(
+                request, f"Customer Detail Updated")
+            return redirect(reverse('view_customer', args=[customer.id]))
+        else:
+            messages.error(
+                request, f"Form Errors: \n {customerForm.errors} \n {userForm.errors}   ")
+    context = {'user_form': userForm, 'customer_form': customerForm}
+    return render(request, "account/customer_form.html", context)
