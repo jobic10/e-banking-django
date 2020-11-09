@@ -81,5 +81,6 @@ def edit_customer(request, customer_id):
         else:
             messages.error(
                 request, f"Form Errors: \n {customerForm.errors} \n {userForm.errors}   ")
-    context = {'user_form': userForm, 'customer_form': customerForm}
+    context = {'user_form': userForm,
+               'customer_form': customerForm, 'isEdit': True}
     return render(request, "account/customer_form.html", context)

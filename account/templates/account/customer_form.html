@@ -7,11 +7,23 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="page-header">
+
+      {% if isEdit %}
+
+      <h3 class="page-title">Edit Customer </h3>
+      {% else %}
       <h3 class="page-title">Create New Customer </h3>
+      {% endif %}
+
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Customer</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Add</li>
+          <li class="breadcrumb-item active" aria-current="page"> {% if isEdit %}
+
+            Edit
+            {% else %}
+            Add
+            {% endif %}</li>
         </ol>
       </nav>
     </div>
@@ -19,7 +31,14 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Customer Registration Form</h4>
+            <h4 class="card-title">Customer
+
+              {% if isEdit %}
+              Update
+              {% else %}
+              Registration
+              {% endif %}
+              Form</h4>
             <p class="card-description">
               <marquee behavior="alternate" direction="right" scrollamount='1'>Be sure to have photocopies of their
                 credentials</marquee>
