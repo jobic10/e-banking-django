@@ -68,7 +68,6 @@ def manage_customer(request):
 
 def edit_customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
-    user = customer.user
     userForm = UserForm(request.POST or None,
                         request.FILES or None, instance=customer.user)
     customerForm = CustomerForm(request.POST or None, instance=customer)
