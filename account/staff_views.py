@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
-
+from .filters import *
 from .forms import *
 from .models import *
 
@@ -109,5 +109,11 @@ def edit_customer(request, customer_id):
 
 
 def search_customer(request):
-    context = {}
-    return render(request, "account/manage_customer.html", context)
+    allCustomers = Customer.objects.all()
+    filter = CustomerFilter(request.GET, queryset=allCustomers)
+    customers = filter.qs
+    context = {
+        'filter': filter,
+        'customers': customers
+    }
+    return render(request, "account/search.html", context)
