@@ -49,7 +49,12 @@
               <hr>
               {{ customer_form.as_p }}
               <hr>
+
+              {% if isEdit %}
+              <input type="submit" class="btn btn-info" value="Update Customer">
+              {% else %}
               <input type="submit" class="btn btn-info" value="Create New Customer">
+              {% endif %}
             </form>
           </div>
         </div>
