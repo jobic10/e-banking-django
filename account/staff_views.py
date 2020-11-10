@@ -55,8 +55,30 @@ def view_customer(request, customer_id):
     return render(request, "account/view_customer.html", context)
 
 
-def manage_customer(request):
+def manage_all_customer(request):
     allCustomers = Customer.objects.all()
+    paginator = Paginator(allCustomers, 25)
+    page_number = request.GET.get('page')
+    customers = paginator.get_page(page_number)
+    context = {
+        'customers': customers
+    }
+    return render(request, "account/manage_customer.html", context)
+
+
+def manage_savings_customer(request):
+    allCustomers = Customer.objects.filter(account_type='Savings')
+    paginator = Paginator(allCustomers, 25)
+    page_number = request.GET.get('page')
+    customers = paginator.get_page(page_number)
+    context = {
+        'customers': customers
+    }
+    return render(request, "account/manage_customer.html", context)
+
+
+def manage_current_customer(request):
+    allCustomers = Customer.objects.filter(account_type='current')
     paginator = Paginator(allCustomers, 25)
     page_number = request.GET.get('page')
     customers = paginator.get_page(page_number)
@@ -84,3 +106,8 @@ def edit_customer(request, customer_id):
     context = {'user_form': userForm,
                'customer_form': customerForm, 'isEdit': True}
     return render(request, "account/customer_form.html", context)
+
+
+def search_customer(request):
+    context = {}
+    return render(request, "account/manage_customer.html", context)

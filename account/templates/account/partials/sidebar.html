@@ -78,23 +78,48 @@
       </a>
     </li>
     {% url 'create_customer_account' as create_customer_account %}
-    {% url 'manage_customer' as manage_customer %}
-    <li class="nav-item  {% if request.path == create_customer_account %}active {% endif %}  menu-items">
-      <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+    {% url 'manage_all_customer' as manage_all_customer %}
+    {% url 'manage_savings_customer' as manage_savings_customer %}
+    {% url 'manage_current_customer' as manage_current_customer %}
+    {% url 'search_customer' as search_customer %}
+    <li
+      class="nav-item  {% if request.path == create_customer_account or request.path == search_customer %}active {% endif %}  menu-items">
+      <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false" aria-controls="customer">
         <span class="menu-icon">
           <i class="mdi mdi-account-group"></i>
         </span>
         <span class="menu-title">Customers</span>
         <i class="menu-arrow"></i>
       </a>
-      <div class="collapse" id="ui-basic">
+      <div class="collapse" id="customer">
         <ul class="nav flex-column sub-menu">
           <li class="nav-item"> <a class="nav-link" href="{{ create_customer_account }}">Create New</a></li>
-          <li class="nav-item"> <a class="nav-link" href="{{ manage_customer }}">Manage</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ search_customer }}">Search</a>
+          </li>
         </ul>
       </div>
     </li>
 
+    <li
+      class="nav-item  {% if request.path == manage_all_customer or request.path == manage_savings_customer or request.path == manage_current_customer %}active {% endif %}  menu-items">
+      <a class="nav-link" data-toggle="collapse" href="#manage-customer" aria-expanded="false"
+        aria-controls="manage-customer">
+        <span class="menu-icon">
+          <i class="mdi mdi-account-group"></i>
+        </span>
+        <span class="menu-title">Manage Customers</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="manage-customer">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{ manage_all_customer }}">All</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ manage_savings_customer }}">Savings</a>
+          </li>
+          <li class="nav-item"> <a class="nav-link" href="{{ manage_current_customer }}">Current</a>
+          </li>
+        </ul>
+      </div>
+    </li>
 
     <li class="nav-item menu-items">
       <a class="nav-link" href="pages/forms/basic_elements.html">
