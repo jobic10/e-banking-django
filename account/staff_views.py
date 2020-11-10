@@ -68,8 +68,8 @@ def manage_customer(request):
 
 def edit_customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
-    userForm = UserForm(request.POST or None,
-                        request.FILES or None, instance=customer.user)
+    userForm = UserEditForm(request.POST or None,
+                            request.FILES or None, instance=customer.user)
     customerForm = CustomerForm(request.POST or None, instance=customer)
     if request.method == 'POST':
         if all([userForm.is_valid(), customerForm.is_valid()]):

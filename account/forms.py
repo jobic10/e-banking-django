@@ -27,10 +27,14 @@ class UserForm(UserCreationForm, FormSettings):
         super(UserForm, self).__init__(*args, **kwargs)
         for fieldname in ['password1', 'password2']:
             self.fields[fieldname].help_text = None
-        if self.instance.pk:
-            del self.fields['password1']
-            del self.fields['password2']
 
+    class Meta:
+        model = User
+        fields = ('last_name', 'first_name', 'email',
+                  'gender', 'profile_pic', 'address')
+
+
+class UserEditForm(FormSettings):
     class Meta:
         model = User
         fields = ('last_name', 'first_name', 'email',
