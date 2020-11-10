@@ -28,8 +28,8 @@ class UserForm(UserCreationForm, FormSettings):
         for fieldname in ['password1', 'password2']:
             self.fields[fieldname].help_text = None
         if self.instance.pk:
-            self.fields['password1'].required = False
-            self.fields['password2'].required = False
+            del self.fields['password1']
+            del self.fields['password2']
 
     class Meta:
         model = User
