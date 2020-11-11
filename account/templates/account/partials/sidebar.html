@@ -121,6 +121,28 @@
       </div>
     </li>
 
+    {% url 'credit_transaction' as credit_transaction %}
+    {% url 'debit_transaction' as debit_transaction %}
+    {% url 'transaction_logs' as transaction_logs %}
+    <li
+      class="nav-item  {% if request.path == new_transaction or request.path == transaction_logs %}active {% endif %}  menu-items">
+      <a class="nav-link" data-toggle="collapse" href="#transaction" aria-expanded="false" aria-controls="transaction">
+        <span class="menu-icon">
+          <i class="mdi mdi-account-group"></i>
+        </span>
+        <span class="menu-title">Transaction</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="transaction">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{ credit_transaction }}">Credit</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ debit_transaction }}">Debit</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ transaction_logs }}">Logs</a>
+          </li>
+        </ul>
+      </div>
+    </li>
+
     <li class="nav-item menu-items">
       <a class="nav-link" href="pages/forms/basic_elements.html">
         <span class="menu-icon">
