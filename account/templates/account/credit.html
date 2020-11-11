@@ -1,0 +1,49 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Credit Transaction </h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Transaction</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Credit</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">Please fill in all form fields</h4>
+            <form action="" method="post">
+              <div class="row">
+
+                {% csrf_token %}
+                {% for field in  form  %}
+                <div class="col-md-4">
+                  <div class="form-group">
+
+                    {{ field.label_tag }}
+                    {{ field }}
+                    {{ field.errors }}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <button class="btn btn-primary btn-block" type="submit">Proceed</button>
+                </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>{% endblock content %}

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'account.apps.AccountConfig',
     'home.apps.HomeConfig',
     'advert.apps.AdvertConfig',
+    'transaction.apps.TransactionConfig',
 
 ]
 
