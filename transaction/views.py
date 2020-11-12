@@ -1,4 +1,5 @@
-from django.shortcuts import get_object_or_404, render
+from transaction.models import BankCreditTransaction
+from django.shortcuts import get_object_or_404, render, reverse, redirect
 from account.models import *
 from django.contrib import messages
 from .forms import CreditForm
@@ -12,7 +13,10 @@ def credit_transaction(request):
     }
     if request.method == 'POST':
         if form.is_valid():
-            pass
+            obj = form.save(commit=False)
+            obj.save()
+            messages.success(request, "Transaction Started. Please Verify.")
+            return redirect(reverse('verify_transaction', args=[obj.id]))
         else:
             messages.error(request, "Form invalid!")
     return render(request, "account/credit.html", context)
@@ -26,3 +30,15 @@ def debit_transaction(request):
 def transaction_logs(request):
     context = {}
     return render(request, "account/customer_form.html", context)
+
+
+def verify_transaction(request, transaction_id):
+    transaction = get_object_or_404(BankCreditTransaction, id=transaction_id)
+    if transaction.status != 0:
+        messages.success(request, "Sorry, this transaction has expired!")
+        return redirect(reverse('dashboard'))
+    else:
+        context = {
+            'transaction': transaction
+        }
+        return render(request, "account/verify.html", context)
