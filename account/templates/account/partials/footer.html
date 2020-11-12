@@ -24,6 +24,10 @@
       <div class="modal-body">
         {% if message.tags == 'success' %}
         <p class='alert alert-success'>{{ message|safe }}</p>
+        {% elif message.tags == 'warning' %}
+        <p class='alert alert-warning'>{{ message|safe|title|escape }}</p>
+        {% elif message.tags == 'info' %}
+        <p class='alert alert-info'>{{ message|safe|title|escape }}</p>
         {% else %}
         <p class='alert alert-danger'>{{ message|safe|title|escape }}</p>
 
