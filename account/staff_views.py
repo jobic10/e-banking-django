@@ -57,9 +57,9 @@ def view_customer(request, customer_id):
     y = 5 - x
     customer = get_object_or_404(Customer, id=customer_id)
     credit_transactions = Transaction.objects.filter(
-        receiver=customer.user).only('amount', 'updated_at')
+        receiver=customer.user).only('amount', 'updated_at', 'description')
     debit_transactions = Transaction.objects.filter(
-        sender=customer.user).only('amount', 'updated_at')
+        sender=customer.user).only('amount', 'updated_at', 'description')
     if len(credit_transactions) > x:
         credit_transactions = credit_transactions[:x]
     if len(debit_transactions) > y:
