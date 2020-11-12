@@ -15,8 +15,10 @@ def credit_transaction(request):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.save()
-            messages.success(request, "Transaction Started. Please Verify.")
-            return redirect(reverse('verify_transaction', args=[obj.id]))
+            id = obj.id
+            messages.success(
+                request, f"Transaction Started. Please Confirm Transaction#{id}.")
+            return redirect(reverse('verify_transaction', args=[id]))
         else:
             messages.error(request, "Form invalid!")
     return render(request, "account/credit.html", context)
@@ -48,13 +50,17 @@ def verify_transaction(request, transaction_id):
                 messages.info(request, "Transaction has been cancelled.")
                 return redirect(reverse('dashboard'))
             else:  # Approved Transaction
-                customer = transaction.customer
-                customer.balance += transaction.amount
-                transaction.balance_before = customer.balance
-                transaction.status = 1
-                customer.save()
-                transaction.save()
-                messages.success(request, "Transaction has been approved.")
-                return redirect(reverse('dashboard'))
+                try:
+                    customer = transaction.customer
+                    customer.balance += transaction.amount
+                    transaction.balance_before = customer.balance
+                    transaction.status = 1
+                    customer.save()
+                    transaction.save()
+                    messages.success(
+                        request, "Transaction has been approved.")
+                    return redirect(reverse('view_customer', args=[customer.id]))
+                except:
+                    messages.success(request, "Transaction Error.")
 
         return render(request, "account/verify.html", context)

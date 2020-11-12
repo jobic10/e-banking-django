@@ -13,6 +13,11 @@ class FormSettings(forms.ModelForm):
 
 
 class CustomerForm(FormSettings):
+    def __init__(self, *args, **kwargs):
+        super(CustomerForm, self).__init__(*args, **kwargs)
+        if self.instance.pk:
+            self.fields['balance'].disabled = True
+
     class Meta:
         model = Customer
         fields = ('phone', 'date_of_birth', 'account_type',
