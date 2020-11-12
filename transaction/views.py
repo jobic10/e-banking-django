@@ -35,10 +35,26 @@ def transaction_logs(request):
 def verify_transaction(request, transaction_id):
     transaction = get_object_or_404(BankCreditTransaction, id=transaction_id)
     if transaction.status != 0:
-        messages.success(request, "Sorry, this transaction has expired!")
+        messages.error(request, "Sorry, this transaction has expired!")
         return redirect(reverse('dashboard'))
     else:
         context = {
             'transaction': transaction
         }
+        if request.method == 'POST':
+            if request.POST.get('approve') == None:  # Transaction was not approved
+                transaction.status = -1
+                transaction.save()
+                messages.info(request, "Transaction has been cancelled.")
+                return redirect(reverse('dashboard'))
+            else:  # Approved Transaction
+                customer = transaction.customer
+                customer.balance += transaction.amount
+                transaction.balance_before = customer.balance
+                transaction.status = 1
+                customer.save()
+                transaction.save()
+                messages.success(request, "Transaction has been approved.")
+                return redirect(reverse('dashboard'))
+
         return render(request, "account/verify.html", context)
