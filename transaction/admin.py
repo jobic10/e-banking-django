@@ -1,5 +1,4 @@
-from transaction.models import BankCreditTransaction
 from django.contrib import admin
-
+from .models import CreditTransaction
 # Register your models here.
-admin.site.register(BankCreditTransaction)
+admin.site.register(CreditTransaction)

@@ -1,4 +1,4 @@
-from .models import BankCreditTransaction
+from .models import CreditTransaction
 from django import forms
 from account.models import Customer
 from django.core.exceptions import ValidationError
@@ -10,7 +10,7 @@ from django.db.models import Q
 class CreditForm(forms.ModelForm):
     account_type = forms.ChoiceField(
         choices=[(None, '----'), ('Savings', 'Savings'), ('Current', 'Current')])
-    customer = forms.CharField(max_length=15, label="Account Number")
+    receiver = forms.CharField(max_length=15, label="Account Number")
     amount = forms.FloatField()
     balance_before = None
 
@@ -19,14 +19,14 @@ class CreditForm(forms.ModelForm):
         for field in self.visible_fields():
             field.field.widget.attrs['class'] = 'form-control'
 
-    def clean_customer(self):
+    def clean_receiver(self):
         cleaned_data = super().clean()
-        account_number = cleaned_data.get('customer')
+        account_number = cleaned_data.get('receiver')
         account_type = self.data.get('account_type')
         try:
             customer = Customer.objects.get(
                 account_number=account_number, account_type=account_type)
-            return customer
+            return customer.user
         except:
             suggested_account = Customer.objects.filter(
                 Q(account_number__startswith=account_number) | Q(account_number__endswith=account_number))
@@ -44,6 +44,6 @@ class CreditForm(forms.ModelForm):
             )
 
     class Meta:
-        model = BankCreditTransaction
-        fields = ['customer', 'account_type',
+        model = CreditTransaction
+        fields = ['receiver', 'account_type',
                   'amount', 'description']

@@ -7,7 +7,7 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title"> View Customer </h3>
+      <h3 class="page-title"> {{ customer }} </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Customer</a></li>
@@ -19,7 +19,7 @@
       <div class="col-6 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title text-center">{{ customer }}'s Personal Detail</h4>
+            <h4 class="card-title text-center">Personal Detail</h4>
             <div class='text-center m-3'>
               <img class='img-fluid img-lg rounded-circle' src="{{ customer.user.profile_pic.url }}" alt="">
             </div>
@@ -69,7 +69,7 @@
       <div class="col-6 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">{{ customer }}'s Account Details</h4>
+            <h4 class="card-title">Account Details</h4>
             <div class="table-responsive">
               <table class="table table-striped table-bordered">
 
@@ -91,6 +91,21 @@
               </table>
 
             </div>
+            <hr>
+            <h4 class="card-title">Last five (5) transactions</h4>
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+
+
+                <tr>
+                  <th>ID</th>
+                  <th>Type</th>
+                  <th>Amount</th>
+                </tr>
+              </table>
+
+            </div>
+
           </div>
         </div>
       </div>

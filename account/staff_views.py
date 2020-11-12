@@ -51,6 +51,7 @@ def create_customer_account(request):
 
 def view_customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
+
     context = {'customer': customer}
     return render(request, "account/view_customer.html", context)
 
