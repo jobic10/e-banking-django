@@ -1,4 +1,4 @@
-from transaction.models import BankCreditTransaction
+from transaction.models import CreditTransaction
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from account.models import *
 from django.contrib import messages
@@ -14,6 +14,7 @@ def credit_transaction(request):
     if request.method == 'POST':
         if form.is_valid():
             obj = form.save(commit=False)
+            obj.sender = request.user
             obj.save()
             id = obj.id
             messages.success(
@@ -35,7 +36,7 @@ def transaction_logs(request):
 
 
 def verify_transaction(request, transaction_id):
-    transaction = get_object_or_404(BankCreditTransaction, id=transaction_id)
+    transaction = get_object_or_404(CreditTransaction, id=transaction_id)
     if transaction.status != 0:
         messages.error(request, "Sorry, this transaction has expired!")
         return redirect(reverse('dashboard'))
@@ -61,6 +62,6 @@ def verify_transaction(request, transaction_id):
                         request, "Transaction has been approved.")
                     return redirect(reverse('view_customer', args=[customer.id]))
                 except:
-                    messages.success(request, "Transaction Error.")
+                    messages.error(request, "Transaction Error.")
 
         return render(request, "account/verify.html", context)
