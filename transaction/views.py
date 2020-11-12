@@ -9,7 +9,8 @@ from .forms import CreditForm
 def credit_transaction(request):
     form = CreditForm(request.POST or None)
     context = {
-        'form': form
+        'form': form,
+        'type': 'Credit'
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -22,12 +23,27 @@ def credit_transaction(request):
             return redirect(reverse('verify_transaction', args=[id]))
         else:
             messages.error(request, "Form invalid!")
-    return render(request, "account/credit.html", context)
+    return render(request, "account/start_transaction.html", context)
 
 
 def debit_transaction(request):
-    context = {}
-    return render(request, "account/customer_form.html", context)
+    form = CreditForm(request.POST or None)
+    context = {
+        'form': form,
+        'type': 'Debit'
+    }
+    if request.method == 'POST':
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.sender = request.user
+            obj.save()
+            id = obj.id
+            messages.success(
+                request, f"Transaction Started. Please Confirm Transaction#{id}.")
+            return redirect(reverse('verify_transaction', args=[id]))
+        else:
+            messages.error(request, "Form invalid!")
+    return render(request, "account/start_transaction.html", context)
 
 
 def transaction_logs(request):
