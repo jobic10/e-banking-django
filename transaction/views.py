@@ -52,9 +52,9 @@ def verify_transaction(request, transaction_id):
                 return redirect(reverse('dashboard'))
             else:  # Approved Transaction
                 try:
-                    customer = transaction.customer
-                    customer.balance += transaction.amount
+                    customer = transaction.receiver.customer  # Get balance
                     transaction.balance_before = customer.balance
+                    customer.balance += transaction.amount
                     transaction.status = 1
                     customer.save()
                     transaction.save()
