@@ -5,13 +5,13 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 
-class BankCreditTransaction(models.Model):
+class Transaction(models.Model):
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="receiver")
     description = models.CharField(max_length=100)
     balance_before = models.FloatField(null=True, blank=True)
     amount = models.FloatField(validators=[
-        MinValueValidator(100)
+        MinValueValidator(10)
     ])
     status = models.SmallIntegerField(
         default=0, help_text="If 0, transaction is pending; approved if 1, rejected if -1")
