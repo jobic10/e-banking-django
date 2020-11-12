@@ -1,0 +1,75 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="main-panel">
+  <div class="content-wrapper">
+    <div class="page-header">
+      <h3 class="page-title"> Validate Transaction </h3>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Transaction</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Verify</li>
+        </ol>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-12 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered">
+
+                <tr>
+                  <th>Full Name </th>
+                  <td>{{ transaction.customer }}</td>
+                </tr>
+                <tr>
+                  <th>Account Number </th>
+                  <td>{{ transaction.customer.account_number }}</td>
+                </tr>
+                <tr>
+                  <th>Amount</th>
+                  <td>{{ transaction.amount }}</td>
+                </tr>
+                <tr>
+                  <th>Description </th>
+                  <td>{{ transaction.description }}</td>
+                </tr>
+                <tr>
+                  <th>Date Created </th>
+                  <td>{{ transaction.created_at }}</td>
+                </tr>
+                <tr>
+                  <th colspan="2" class="text-center"> Action
+                    <hr>
+                    {% if transaction.status != 0 %}
+                    - - -
+                    {% else %}
+                    <form action="" method="post">
+                      {% csrf_token %}
+                      <button class="btn btn-outline-success"
+                        onclick="return confirm('Fund this account with {{ transaction.amount }} ?')" value="1"
+                        name='approve'> <i class="mdi mdi-marker-check"></i> Approve</button> -
+                      <button class="btn btn-outline-danger" onclick="return confirm('Reject this transaction ?')"
+                        value="0" name='reject'><i class="mdi mdi-cancel"></i>Reject</button>
+                    </form>
+                    {% endif %}
+                  </th>
+                </tr>
+
+
+
+              </table>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
