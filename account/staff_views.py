@@ -1,8 +1,9 @@
 import random
 import string
+from transaction.views import credit_transaction
+from transaction.models import Transaction
 from django.core.paginator import Paginator
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from .filters import *
@@ -50,9 +51,24 @@ def create_customer_account(request):
 
 
 def view_customer(request, customer_id):
+    from random import randint
+    total = 5
+    x = randint(2, 3)
+    y = 5 - x
     customer = get_object_or_404(Customer, id=customer_id)
+    credit_transactions = Transaction.objects.filter(
+        receiver=customer.user).only('amount', 'updated_at')
+    debit_transactions = Transaction.objects.filter(
+        sender=customer.user).only('amount', 'updated_at')
+    if len(credit_transactions) > x:
+        credit_transactions = credit_transactions[:x]
+    if len(debit_transactions) > y:
+        debit_transactions = debit_transactions[:y]
 
-    context = {'customer': customer}
+    context = {'customer': customer,
+               'credit_transactions': credit_transactions,
+               'debit_transactions': debit_transactions
+               }
     return render(request, "account/view_customer.html", context)
 
 

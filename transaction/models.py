@@ -5,7 +5,7 @@ from django.core.validators import MinValueValidator
 # Create your models here.
 
 
-class CreditTransaction(models.Model):
+class Transaction(models.Model):
     sender = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="sender")
     receiver = models.ForeignKey(

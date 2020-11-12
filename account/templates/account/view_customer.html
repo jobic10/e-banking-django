@@ -98,10 +98,25 @@
 
 
                 <tr>
-                  <th>ID</th>
                   <th>Type</th>
                   <th>Amount</th>
+                  <th>Date</th>
                 </tr>
+                {% for debit_transaction in debit_transactions %}
+                <tr>
+                  <td>Debit</td>
+                  <td>{{ debit_transaction.amount }}</td>
+                  <td>{{ debit_transaction.updated_at }}</td>
+                </tr>
+                {% endfor %}
+
+                {% for credit_transaction in credit_transactions %}
+                <tr>
+                  <td>Debit</td>
+                  <td>{{ credit_transaction.amount }}</td>
+                  <td>{{ credit_transaction.updated_at }}</td>
+                </tr>
+                {% endfor %}
               </table>
 
             </div>

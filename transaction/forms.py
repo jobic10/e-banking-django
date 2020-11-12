@@ -1,4 +1,4 @@
-from .models import CreditTransaction
+from .models import Transaction
 from django import forms
 from account.models import Customer
 from django.core.exceptions import ValidationError
@@ -44,6 +44,6 @@ class CreditForm(forms.ModelForm):
             )
 
     class Meta:
-        model = CreditTransaction
+        model = Transaction
         fields = ['receiver', 'account_type',
                   'amount', 'description']
