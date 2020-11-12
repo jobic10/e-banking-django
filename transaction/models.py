@@ -7,7 +7,7 @@ class BankCreditTransaction(models.Model):
     customer = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name="receiver")
     description = models.CharField(max_length=100)
-    balance_before = models.FloatField(null=True)
+    balance_before = models.FloatField(null=True, blank=True)
     amount = models.FloatField()
     status = models.SmallIntegerField(
         default=0, help_text="If 0, transaction is pending; approved if 1, rejected if -1")
