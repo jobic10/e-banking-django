@@ -1,13 +1,15 @@
 from django.db import models
-from account.models import Customer
+from django.contrib.auth.models import User
 from django.core.validators import MinValueValidator
 
 # Create your models here.
 
 
-class Transaction(models.Model):
-    customer = models.ForeignKey(
-        Customer, on_delete=models.CASCADE, related_name="receiver")
+class CreditTransaction(models.Model):
+    sender = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="sender")
+    receiver = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="receiver")
     description = models.CharField(max_length=100)
     balance_before = models.FloatField(null=True, blank=True)
     amount = models.FloatField(validators=[
