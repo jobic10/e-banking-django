@@ -36,7 +36,7 @@ class CreditForm(forms.Form):
                 else:
                     msg = f"Did you mean {first_suggested_account.account_number} with account type {first_suggested_account.account_type}"
                 raise ValidationError(
-                    _(f'Invalid Account, {msg}?'))
+                    _(f'No matching account number with the selected account type, {msg}?'))
             raise ValidationError(
                 _('Invalid Account Number Specified'),
                 _('Account Number Error')
