@@ -19,12 +19,10 @@ class CreditForm(forms.ModelForm):
         super(CreditForm, self).__init__(*args, **kwargs)
         if self.form_type == 'C':
             self.type = "credit"
-            # self.fields['sender'].widget = forms.HiddenInput()
             del self.fields['sender']
         else:
             self.type = "debit"
             del self.fields['receiver']
-            # self.fields['receiver'].widget = forms.HiddenInput()
         self.fields['amount'] = forms.FloatField(
             label=f"Amount to be {self.type}ed")
         for field in self.visible_fields():
