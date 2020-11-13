@@ -75,9 +75,16 @@ def verify_transaction(request, transaction_id):
                 return redirect(reverse('dashboard'))
             else:  # Approved Transaction
                 try:
-                    customer = transaction.receiver.customer  # Get balance
+                    if transaction.category == 'D':
+                        # Debit
+                        customer = transaction.sender.customer  # Get balance
+                        customer.balance -= transaction.amount
+                    else:
+                        # Credit
+                        customer = transaction.receiver.customer  # Get balance
+                        customer.balance += transaction.amount
+
                     transaction.balance_before = customer.balance
-                    customer.balance += transaction.amount
                     transaction.status = 1
                     customer.save()
                     transaction.save()
@@ -85,6 +92,6 @@ def verify_transaction(request, transaction_id):
                         request, "Transaction has been approved.")
                     return redirect(reverse('view_customer', args=[customer.id]))
                 except:
-                    messages.error(request, "Transaction Error.")
+                    messages.error(request, "Transaction Error")
 
         return render(request, "account/verify.html", context)
