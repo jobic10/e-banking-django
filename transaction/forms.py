@@ -80,6 +80,26 @@ class CreditForm(forms.ModelForm):
                 _('Account Number Error')
             )
 
+    def clean_amount(self):
+        if self.form_type != 'D':
+            return
+        cleaned_data = super().clean()
+        # Current can withdraw all money, Savings must have least  #500; so we check to see that this is enforced
+        amount = cleaned_data.get('amount')
+        user = cleaned_data.get('sender')
+        if user != None:
+            customer = user.customer
+            if customer is not None:
+                acct_type = customer.account_type
+                balance = customer.balance
+                if (balance - amount) < 1:
+                    raise ValidationError(
+                        _("After withdrawal, account balance is less than zero"), _("Invalid Amount! "))
+                if acct_type == 'Savings' and (balance - amount) < 500:
+                    raise ValidationError(
+                        _("Account type is 'Savings'. After withdrawal, account balance is less than #500"), _("Invalid Amount! "))
+        return amount
+
     class Meta:
         model = Transaction
         fields = ['receiver', 'sender', 'account_type',
