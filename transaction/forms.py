@@ -54,7 +54,7 @@ class CreditForm(forms.ModelForm):
             )
 
     def clean_sender(self):
-        if self.form_type != 'D':  # This is Debit
+        if self.form_type != 'D':  # This is Credit
             return
         cleaned_data = super().clean()
         account_number = cleaned_data.get('sender')
