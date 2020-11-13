@@ -30,7 +30,7 @@
 
                     {{ field.label_tag }}
                     {{ field }}
-                    <span class="text-danger font-italic">{{ field.errors }}</span>
+                    <span class="text-danger font-italic">{{ field.errors | striptags }}</span>
                   </div>
                 </div>
                 {% endfor %}
