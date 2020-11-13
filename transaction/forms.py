@@ -12,20 +12,23 @@ class CreditForm(forms.ModelForm):
         choices=[(None, '----'), ('Savings', 'Savings'), ('Current', 'Current')])
     sender = forms.CharField(max_length=15, label="Account Number")
     receiver = forms.CharField(max_length=15, label="Account Number")
-    amount = forms.FloatField()
     balance_before = None
 
     def __init__(self, *args, **kwargs):
         self.form_type = kwargs.pop('form_type', None)
         super(CreditForm, self).__init__(*args, **kwargs)
-        for field in self.visible_fields():
-            field.field.widget.attrs['class'] = 'form-control'
         if self.form_type == 'C':
+            self.type = "credit"
             # self.fields['sender'].widget = forms.HiddenInput()
             del self.fields['sender']
         else:
+            self.type = "debit"
             del self.fields['receiver']
             # self.fields['receiver'].widget = forms.HiddenInput()
+        self.fields['amount'] = forms.FloatField(
+            label=f"Amount to be {self.type}ed")
+        for field in self.visible_fields():
+            field.field.widget.attrs['class'] = 'form-control'
 
     def clean_receiver(self):
         if self.form_type != 'C':  # This is Debit
