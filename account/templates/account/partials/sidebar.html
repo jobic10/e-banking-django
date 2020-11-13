@@ -77,11 +77,14 @@
         <span class="menu-title">Dashboard</span>
       </a>
     </li>
+    {% if request.user.is_staff %}
     {% url 'create_customer_account' as create_customer_account %}
     {% url 'manage_all_customer' as manage_all_customer %}
     {% url 'manage_savings_customer' as manage_savings_customer %}
     {% url 'manage_current_customer' as manage_current_customer %}
     {% url 'search_customer' as search_customer %}
+
+
     <li
       class="nav-item  {% if request.path == create_customer_account or request.path == search_customer %}active {% endif %}  menu-items">
       <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false" aria-controls="customer">
@@ -99,6 +102,8 @@
         </ul>
       </div>
     </li>
+
+
 
     <li
       class="nav-item  {% if request.path == manage_all_customer or request.path == manage_savings_customer or request.path == manage_current_customer %}active {% endif %}  menu-items">
@@ -121,6 +126,7 @@
       </div>
     </li>
 
+    {% endif %}
     {% url 'credit_transaction' as credit_transaction %}
     {% url 'debit_transaction' as debit_transaction %}
     {% url 'transaction_logs' as transaction_logs %}
