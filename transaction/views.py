@@ -78,13 +78,14 @@ def verify_transaction(request, transaction_id):
                     if transaction.category == 'D':
                         # Debit
                         customer = transaction.sender.customer  # Get balance
+                        transaction.balance_before = customer.balance
                         customer.balance -= transaction.amount
                     else:
                         # Credit
                         customer = transaction.receiver.customer  # Get balance
+                        transaction.balance_before = customer.balance
                         customer.balance += transaction.amount
 
-                    transaction.balance_before = customer.balance
                     transaction.status = 1
                     customer.save()
                     transaction.save()
