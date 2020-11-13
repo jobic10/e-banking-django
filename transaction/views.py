@@ -7,7 +7,7 @@ from .forms import CreditForm
 
 
 def credit_transaction(request):
-    form = CreditForm(request.POST or None)
+    form = CreditForm(request.POST or None, form_type="C")
     context = {
         'form': form,
         'type': 'Credit'
@@ -16,10 +16,11 @@ def credit_transaction(request):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.sender = request.user
+            obj.category = 'C'
             obj.save()
             id = obj.id
             messages.success(
-                request, f"Transaction Started. Please Confirm Transaction#{id}.")
+                request, f"Transaction Started. Please Confirm Transaction #{id}.")
             return redirect(reverse('verify_transaction', args=[id]))
         else:
             messages.error(request, "Form invalid!")
@@ -27,7 +28,12 @@ def credit_transaction(request):
 
 
 def debit_transaction(request):
-    form = CreditForm(request.POST or None)
+    #! Remember this
+    if request.user.is_staff:  # Bank Debit
+        pass  # Bank
+    else:
+        pass  # Customer
+    form = CreditForm(request.POST or None, form_type="D")
     context = {
         'form': form,
         'type': 'Debit'
@@ -35,11 +41,12 @@ def debit_transaction(request):
     if request.method == 'POST':
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.sender = request.user
+            obj.receiver = request.user
+            obj.category = 'D'
             obj.save()
             id = obj.id
             messages.success(
-                request, f"Transaction Started. Please Confirm Transaction#{id}.")
+                request, f"Transaction Started. Please Confirm Transaction #{id}.")
             return redirect(reverse('verify_transaction', args=[id]))
         else:
             messages.error(request, "Form invalid!")
