@@ -98,26 +98,19 @@
 
 
                 <tr>
+                  <th>ID</th>
                   <th>Type</th>
                   <th>Amount</th>
                   <th>Description</th>
                   <th>Date</th>
                 </tr>
-                {% for debit_transaction in debit_transactions %}
+                {% for transaction in transactions %}
                 <tr>
-                  <td>Debit</td>
-                  <td>{{ debit_transaction.amount }}</td>
-                  <td>{{ debit_transaction.description }}</td>
-                  <td>{{ debit_transaction.updated_at }}</td>
-                </tr>
-                {% endfor %}
-
-                {% for credit_transaction in credit_transactions %}
-                <tr>
-                  <td>Credit</td>
-                  <td>{{ credit_transaction.amount }}</td>
-                  <td>{{ credit_transaction.description }}</td>
-                  <td>{{ credit_transaction.updated_at }}</td>
+                  <td>{{ forloop.counter }}</td>
+                  <td>{% if transaction.category == 'D' %}Debit {% else %}Credit {% endif %}</td>
+                  <td>&#8358; {{ transaction.amount }}</td>
+                  <td>{{ transaction.description }}</td>
+                  <td>{{ transaction.updated_at }}</td>
                 </tr>
                 {% endfor %}
               </table>
