@@ -53,7 +53,7 @@ def create_customer_account(request):
 def view_customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     transactions = Transaction.objects.filter(Q(receiver=customer.user) | Q(
-        sender=customer.user), status=1).only('amount', 'updated_at', 'description')
+        sender=customer.user), status=1).values('amount', 'updated_at', 'description', 'category')
     context = {'customer': customer,
                'transactions': transactions,
                }
