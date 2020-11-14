@@ -55,18 +55,10 @@ def view_customer(request, customer_id):
     x = randint(2, 3)
     y = 5 - x
     customer = get_object_or_404(Customer, id=customer_id)
-    credit_transactions = Transaction.objects.filter(
-        receiver=customer.user, status=1).only('amount', 'updated_at', 'description')
-    debit_transactions = Transaction.objects.filter(
-        sender=customer.user, status=1).only('amount', 'updated_at', 'description')
-    if len(credit_transactions) > x:
-        credit_transactions = credit_transactions[:x]
-    if len(debit_transactions) > y:
-        debit_transactions = debit_transactions[:y]
-
+    transactions = Transaction.objects.filter(
+        receiver=customer.user, status=1).only('amount', 'updated_at', 'description', 'category')[:5]
     context = {'customer': customer,
-               'credit_transactions': credit_transactions,
-               'debit_transactions': debit_transactions
+               'transactions': transactions,
                }
     return render(request, "account/view_customer.html", context)
 
