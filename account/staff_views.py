@@ -50,9 +50,6 @@ def create_customer_account(request):
 
 
 def view_customer(request, customer_id):
-    from random import randint
-    x = randint(2, 3)
-    y = 5 - x
     customer = get_object_or_404(Customer, id=customer_id)
     transactions = Transaction.objects.filter(
         receiver=customer.user, status=1).only('amount', 'updated_at', 'description', 'category')[:5]
