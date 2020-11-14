@@ -108,7 +108,7 @@
                 <tr>
                   <td>{{ forloop.counter }}</td>
                   <td>{% if transaction.category == 'D' %}Debit {% else %}Credit {% endif %}</td>
-                  <td>&#8358; {{ transaction.amount }}</td>
+                  <td>{{ transaction.amount }}</td>
                   <td>{{ transaction.description }}</td>
                   <td>{{ transaction.updated_at }}</td>
                 </tr>

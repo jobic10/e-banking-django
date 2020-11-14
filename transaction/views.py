@@ -1,8 +1,10 @@
 from transaction.models import Transaction
 from django.shortcuts import get_object_or_404, render, reverse, redirect
 from account.models import *
+from django.db.models import Q
 from django.contrib import messages
 from .forms import CreditForm
+from django.core.paginator import Paginator
 # Create your views here.
 
 
@@ -96,3 +98,16 @@ def verify_transaction(request, transaction_id):
                     messages.error(request, "Transaction Error")
 
         return render(request, "account/verify.html", context)
+
+
+def view_transaction(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    querySet = Transaction.objects.filter(Q(receiver=customer.user) | Q(
+        sender=customer.user), status=1).values('amount', 'updated_at', 'description', 'category')
+    paginator = Paginator(querySet, 25)
+    page_number = request.GET.get('page')
+    transactions = paginator.get_page(page_number)
+    context = {'customer': customer,
+               'transactions': transactions,
+               }
+    return render(request, "account/view_transactions.html", context)
