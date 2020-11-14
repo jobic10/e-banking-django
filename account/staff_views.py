@@ -4,6 +4,7 @@ from transaction.models import Transaction
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.shortcuts import redirect, render, get_object_or_404
+from django.db.models import Q
 from django.urls import reverse
 from .filters import *
 from .forms import *
@@ -51,8 +52,8 @@ def create_customer_account(request):
 
 def view_customer(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
-    transactions = Transaction.objects.filter(
-        receiver=customer.user, status=1).only('amount', 'updated_at', 'description', 'category')[:5]
+    transactions = Transaction.objects.filter(Q(receiver=customer.user) | Q(
+        sender=customer.user), status=1).only('amount', 'updated_at', 'description')
     context = {'customer': customer,
                'transactions': transactions,
                }
