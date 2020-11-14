@@ -1,6 +1,5 @@
 import random
 import string
-from transaction.views import credit_transaction
 from transaction.models import Transaction
 from django.core.paginator import Paginator
 from django.contrib import messages
