@@ -103,7 +103,7 @@ def verify_transaction(request, transaction_id):
 def view_transaction(request, customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
     querySet = Transaction.objects.filter(Q(receiver=customer.user) | Q(
-        sender=customer.user), status=1).values('amount', 'updated_at', 'description', 'category')
+        sender=customer.user), status=1)
     paginator = Paginator(querySet, 25)
     page_number = request.GET.get('page')
     transactions = paginator.get_page(page_number)

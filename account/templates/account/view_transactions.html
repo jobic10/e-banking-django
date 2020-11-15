@@ -28,6 +28,7 @@
                 <tr>
                   <th>ID</th>
                   <th>Type</th>
+                  <th>Type</th>
                   <th>Amount</th>
                   <th>Description</th>
                   <th>Date</th>
@@ -36,6 +37,21 @@
                 <tr>
                   <td>{{ forloop.counter }}</td>
                   <td>{% if transaction.category == 'D' %}Debit {% else %}Credit {% endif %}</td>
+                  <td>{% if transaction.category == 'D' %}
+                    {% if transaction.sender.is_staff %}
+                    Bank Withdrawal
+                    {% else %}
+                    {{ transaction.receiver }}
+                    {% endif %}
+                    {% else %}
+
+                    {% if transaction.sender.is_staff %}
+                    Bank Deposit
+                    {% else %}
+                    {{ transaction.sender }}
+                    {% endif %}
+
+                    {% endif %}</td>
                   <td>&#8358; {{ transaction.amount }}</td>
                   <td>{{ transaction.description }}</td>
                   <td>{{ transaction.updated_at }}</td>
