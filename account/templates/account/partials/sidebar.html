@@ -6,6 +6,7 @@
 {% url 'search_customer' as search_customer %}
 {% url 'credit_transaction' as credit_transaction %}
 {% url 'debit_transaction' as debit_transaction %}
+{% url 'transfer_transaction' as transfer_transaction %}
 {% url 'transaction_logs' as transaction_logs %}
 {% url 'view_transaction' customer.id as view_transaction %}
 
@@ -150,7 +151,7 @@
     </li>
     {% else %}
     <li
-      class="nav-item  {% if request.path == credit_transaction or request.path == transaction_logs or request.path == debit_transaction or request.path == view_transaction %}active {% endif %}  menu-items">
+      class="nav-item  {% if request.path == transfer_transaction or request.path == transaction_logs or request.path == debit_transaction or request.path == view_transaction %}active {% endif %}  menu-items">
       <a class="nav-link" data-toggle="collapse" href="#transaction" aria-expanded="false" aria-controls="transaction">
         <span class="menu-icon">
           <i class="mdi mdi-cash"></i>
@@ -160,7 +161,7 @@
       </a>
       <div class="collapse" id="transaction">
         <ul class="nav flex-column sub-menu">
-          <li class="nav-item"> <a class="nav-link" href="{{ credit_transaction }}">Transfer</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ transfer_transaction }}">Transfer</a></li>
           <li class="nav-item"> <a class="nav-link" href="{{ debit_transaction }}">Pay Bills</a></li>
           <li class="nav-item"> <a class="nav-link" href="{{ transaction_logs }}">Logs</a>
           </li>
