@@ -95,8 +95,6 @@
             <h4 class="card-title">Last five (5) transactions</h4>
             <div class="table-responsive">
               <table class="table table-striped table-bordered">
-
-
                 <tr>
                   <th>ID</th>
                   <th>Type</th>
@@ -107,7 +105,15 @@
                 {% for transaction in transactions %}
                 <tr>
                   <td>{{ forloop.counter }}</td>
-                  <td>{% if transaction.category == 'D' %}Debit {% else %}Credit {% endif %}</td>
+                  <td>
+                    {% if transaction.category == 'D' %}
+                    Debit
+                    {% elif transaction.category == 'T' %}
+                    Transfer
+                    {% else %}
+                    Credit
+                    {% endif %}
+                  </td>
                   <td>{{ transaction.amount }}</td>
                   <td>{{ transaction.description }}</td>
                   <td>{{ transaction.updated_at }}</td>
