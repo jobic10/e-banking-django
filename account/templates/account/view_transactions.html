@@ -27,8 +27,8 @@
 
                 <tr>
                   <th>ID</th>
-                  <th>Type</th>
-                  <th>Type</th>
+                  <th>Category</th>
+                  <th>Receiver</th>
                   <th>Amount</th>
                   <th>Description</th>
                   <th>Date</th>
@@ -36,21 +36,24 @@
                 {% for transaction in transactions %}
                 <tr>
                   <td>{{ forloop.counter }}</td>
-                  <td>{% if transaction.category == 'D' %}Debit {% else %}Credit {% endif %}</td>
+                  <td>{% if transaction.category == 'D' %}Debit {% elif transaction.category == 'T' %}Transfer
+                    {% else %}Credit {% endif %}</td>
                   <td>{% if transaction.category == 'D' %}
-                    {% if transaction.sender.is_staff %}
+                    {% if transaction.receiver.is_staff %}
                     Bank Withdrawal
                     {% else %}
                     {{ transaction.receiver }}
+                    Id = {{ transaction.id }}
                     {% endif %}
+                    {% elif transaction.category == 'T' %}
+                    {{ transaction.sender }}
                     {% else %}
-
+                    {# Credit #}
                     {% if transaction.sender.is_staff %}
                     Bank Deposit
                     {% else %}
                     {{ transaction.sender }}
                     {% endif %}
-
                     {% endif %}</td>
                   <td>&#8358; {{ transaction.amount }}</td>
                   <td>{{ transaction.description }}</td>
