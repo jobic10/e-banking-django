@@ -81,6 +81,13 @@ def verify_transaction(request, transaction_id):
                         customer = transaction.sender.customer  # Get balance
                         transaction.balance_before = customer.balance
                         customer.balance -= transaction.amount
+                        if not request.user.is_staff:
+                            receiver = transaction.receiver.customer
+                            receiver.balance += transaction.amount
+                            receiver.save()
+                            customer.save()
+                            transaction.save()
+                            return redirect(reverse('dashboard'))
                     else:
                         # Credit
                         customer = transaction.receiver.customer  # Get balance
