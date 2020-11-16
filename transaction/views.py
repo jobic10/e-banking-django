@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, render, reverse, redirect
 from account.models import *
 from django.db.models import Q
 from django.contrib import messages
-from .forms import CreditForm
+from .forms import CreditForm, TransferForm
 from django.core.paginator import Paginator
 # Create your views here.
 
@@ -32,9 +32,10 @@ def credit_transaction(request):
 def debit_transaction(request):
     if request.user.is_staff:  # Bank Debit
         title = "Debit"
+        form = CreditForm(request.POST or None, form_type="D")
     else:
+        form = TransferForm(request.POST or None)
         title = "Transfer"
-    form = CreditForm(request.POST or None, form_type="D")
     context = {
         'form': form,
         'type': title,
@@ -42,7 +43,10 @@ def debit_transaction(request):
     if request.method == 'POST':
         if form.is_valid():
             obj = form.save(commit=False)
-            obj.receiver = request.user
+            if request.user.is_staff:
+                obj.receiver = request.user
+            else:
+                obj.sender = request.user
             obj.category = 'D'
             obj.save()
             transaction_id = obj.id

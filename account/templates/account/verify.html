@@ -7,8 +7,15 @@
 <div class="main-panel">
   <div class="content-wrapper">
     <div class="page-header">
-      <h3 class="page-title"> Validate Transaction - {% if transaction.category  == 'D' %}Debit{% else %} Credit
-        {% endif %} </h3>
+      <h3 class="page-title"> Validate Transaction -
+        {% if transaction.category == 'C' %}
+        Credit
+        {% elif transaction.sender.is_staff %}
+        {Debit
+        {% else %}
+        Transfer
+        {% endif %}
+      </h3>
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="#">Transaction</a></li>
@@ -33,8 +40,10 @@
 
                     {% if transaction.category == 'C' %}
                     {{ transaction.receiver }}
-                    {% else %}
+                    {% elif transaction.sender.is_staff %}
                     {{ transaction.sender }}
+                    {% else %}
+                    {{ transaction.receiver }}
                     {% endif %}
 
                   </td>
@@ -44,9 +53,12 @@
                   <td>
                     {% if transaction.category == 'C' %}
                     {{ transaction.receiver.customer.account_number }}
-                    {% else %}
+                    {% elif transaction.sender.is_staff %}
                     {{ transaction.sender.customer.account_number }}
+                    {% else %}
+                    {{ transaction.receiver.customer.account_number }}
                     {% endif %}
+
                 </tr>
                 <tr>
                   <th>Amount</th>
