@@ -30,7 +30,6 @@ def credit_transaction(request):
 
 
 def debit_transaction(request):
-    #! Remember this
     if request.user.is_staff:  # Bank Debit
         title = "Debit"
     else:
