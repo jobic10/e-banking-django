@@ -1,4 +1,14 @@
 {% load static %}
+{% url 'create_customer_account' as create_customer_account %}
+{% url 'manage_all_customer' as manage_all_customer %}
+{% url 'manage_savings_customer' as manage_savings_customer %}
+{% url 'manage_current_customer' as manage_current_customer %}
+{% url 'search_customer' as search_customer %}
+{% url 'credit_transaction' as credit_transaction %}
+{% url 'debit_transaction' as debit_transaction %}
+{% url 'transaction_logs' as transaction_logs %}
+{% url 'view_transaction' customer.id as view_transaction %}
+
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
   <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
     <a class="sidebar-brand brand-logo" href="index.html"><img src="{% static 'assets/images/logo.svg' %}"
@@ -78,12 +88,6 @@
       </a>
     </li>
     {% if request.user.is_staff %}
-    {% url 'create_customer_account' as create_customer_account %}
-    {% url 'manage_all_customer' as manage_all_customer %}
-    {% url 'manage_savings_customer' as manage_savings_customer %}
-    {% url 'manage_current_customer' as manage_current_customer %}
-    {% url 'search_customer' as search_customer %}
-
 
     <li
       class="nav-item  {% if request.path == create_customer_account or request.path == search_customer %}active {% endif %}  menu-items">
@@ -125,11 +129,7 @@
         </ul>
       </div>
     </li>
-    {% endif %}
-    {% url 'credit_transaction' as credit_transaction %}
-    {% url 'debit_transaction' as debit_transaction %}
-    {% url 'transaction_logs' as transaction_logs %}
-    {% url 'view_transaction' customer.id as view_transaction %}
+
     <li
       class="nav-item  {% if request.path == credit_transaction or request.path == transaction_logs or request.path == debit_transaction or request.path == view_transaction %}active {% endif %}  menu-items">
       <a class="nav-link" data-toggle="collapse" href="#transaction" aria-expanded="false" aria-controls="transaction">
@@ -148,8 +148,24 @@
         </ul>
       </div>
     </li>
-
-    <li class="nav-item menu-items">
+    {% else %}
+    <li
+      class="nav-item  {% if request.path == credit_transaction or request.path == transaction_logs or request.path == debit_transaction or request.path == view_transaction %}active {% endif %}  menu-items">
+      <a class="nav-link" data-toggle="collapse" href="#transaction" aria-expanded="false" aria-controls="transaction">
+        <span class="menu-icon">
+          <i class="mdi mdi-cash"></i>
+        </span>
+        <span class="menu-title">Transaction</span>
+        <i class="menu-arrow"></i>
+      </a>
+      <div class="collapse" id="transaction">
+        <ul class="nav flex-column sub-menu">
+          <li class="nav-item"> <a class="nav-link" href="{{ credit_transaction }}">Transfer</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ debit_transaction }}">Pay Bills</a></li>
+          <li class="nav-item"> <a class="nav-link" href="{{ transaction_logs }}">Logs</a>
+          </li>
+        </ul>
+      </div {% endif %} <li class="nav-item menu-items">
       <a class="nav-link" href="pages/forms/basic_elements.html">
         <span class="menu-icon">
           <i class="mdi mdi-bank-transfer"></i>
