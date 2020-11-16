@@ -70,8 +70,8 @@
                       {% csrf_token %}
                       <button class="btn btn-outline-success" {% if transaction.category == 'C' %}
                         onclick="return confirm('Credit this account with {{ transaction.amount }} ?')" value="1"
-                        {% else %} onclick="return confirm('Debit this account with {{ transaction.amount }} ?')"
-                        value="1" {% endif %} name='approve'> <i class="mdi mdi-marker-check"></i> Approve</button> -
+                        {% else %} onclick="return confirm('Proceed ?')" value="1" {% endif %} name='approve'> <i
+                          class="mdi mdi-marker-check"></i> Approve</button> -
                       <button class="btn btn-outline-danger" onclick="return confirm('Reject this transaction ?')"
                         value="0" name='reject'><i class="mdi mdi-cancel"></i>Reject</button>
                     </form>
