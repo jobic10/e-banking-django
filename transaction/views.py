@@ -84,9 +84,12 @@ def verify_transaction(request, transaction_id):
                         if not request.user.is_staff:
                             receiver = transaction.receiver.customer
                             receiver.balance += transaction.amount
+                            transaction.status = 1
                             receiver.save()
                             customer.save()
                             transaction.save()
+                            messages.success(
+                                request, f"Transfer Completed. New Balance = {customer.balance}")
                             return redirect(reverse('dashboard'))
                     else:
                         # Credit
