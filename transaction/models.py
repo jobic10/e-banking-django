@@ -16,7 +16,7 @@ class Transaction(models.Model):
         MinValueValidator(10)
     ])
     category = models.CharField(max_length=6, choices=[
-                                ('C', 'Credit'), ('D', 'Debit')])
+                                ('C', 'Credit'), ('D', 'Debit'), ('T', 'Transfer')])
     status = models.SmallIntegerField(
         default=0, help_text="If 0, transaction is pending; approved if 1, rejected if -1")
     created_at = models.DateTimeField(auto_now_add=True)
