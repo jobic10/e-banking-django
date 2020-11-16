@@ -20,10 +20,10 @@ def credit_transaction(request):
             obj.sender = request.user
             obj.category = 'C'
             obj.save()
-            id = obj.id
+            transaction_id = obj.id
             messages.success(
                 request, f"Transaction Started. Please Confirm Transaction #{id}.")
-            return redirect(reverse('verify_transaction', args=[id]))
+            return redirect(reverse('verify_transaction', args=[transaction_id]))
         else:
             messages.error(request, "Form invalid!")
     return render(request, "account/start_transaction.html", context)
