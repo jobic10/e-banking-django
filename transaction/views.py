@@ -22,7 +22,7 @@ def credit_transaction(request):
             obj.save()
             transaction_id = obj.id
             messages.success(
-                request, f"Transaction Started. Please Confirm Transaction #{id}.")
+                request, f"Transaction Started. Please Confirm Transaction #{transaction_id}.")
             return redirect(reverse('verify_transaction', args=[transaction_id]))
         else:
             messages.error(request, "Form invalid!")
@@ -32,13 +32,13 @@ def credit_transaction(request):
 def debit_transaction(request):
     #! Remember this
     if request.user.is_staff:  # Bank Debit
-        pass  # Bank
+        title = "Debit"
     else:
-        pass  # Customer
+        title = "Transfer"
     form = CreditForm(request.POST or None, form_type="D")
     context = {
         'form': form,
-        'type': 'Debit'
+        'type': title,
     }
     if request.method == 'POST':
         if form.is_valid():
@@ -48,7 +48,7 @@ def debit_transaction(request):
             obj.save()
             transaction_id = obj.id
             messages.success(
-                request, f"Transaction Started. Please Confirm Transaction #{id}.")
+                request, f"Transaction Started. Please Confirm Transaction #{transaction_id}.")
             return redirect(reverse('verify_transaction', args=[transaction_id]))
         else:
             messages.error(request, "Form invalid!")
