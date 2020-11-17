@@ -93,7 +93,7 @@ def verify_transaction(request, transaction_id):
                             customer.save()
                             transaction.save()
                             messages.success(
-                                request, f"Transfer Completed. New Balance = {customer.balance}")
+                                request, f"Transfer Completed. New Balance = &#8358; {customer.balance}")
                             return redirect(reverse('dashboard'))
                     else:
                         # Credit
