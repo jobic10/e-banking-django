@@ -34,7 +34,7 @@ def debit_transaction(request):
         title = "Debit"
         form = CreditForm(request.POST or None, form_type="D")
     else:
-        form = TransferForm(request.POST or None)
+        form = TransferForm(request.POST or None, creator=request.user)
         title = "Transfer"
     context = {
         'form': form,

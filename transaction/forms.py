@@ -115,6 +115,7 @@ class TransferForm(forms.ModelForm):
     balance_before = None
 
     def __init__(self, *args, **kwargs):
+        self.creator = kwargs.pop('creator', None)
         self.form_type = kwargs.pop('form_type', None)
         self.staff = kwargs.pop('staff', None)
         super(TransferForm, self).__init__(*args, **kwargs)
@@ -131,7 +132,12 @@ class TransferForm(forms.ModelForm):
         try:
             customer = Customer.objects.get(
                 account_number=account_number, account_type=account_type)
+            if customer == self.creator.customer:
+                raise ValueError
             return customer.user
+        except ValueError:
+            raise ValidationError(
+                _('You cannot transfer from your account to your account'), _('Invalid Account'))
         except:
             suggested_account = Customer.objects.filter(
                 Q(account_number__startswith=account_number) | Q(account_number__endswith=account_number))
