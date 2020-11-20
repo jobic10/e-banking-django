@@ -68,7 +68,8 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # My Context Processors
-                'advert.context_processors.fetch_advert'
+                'advert.context_processors.fetch_advert',
+                'account.context_processors.this',
             ],
         },
     },
